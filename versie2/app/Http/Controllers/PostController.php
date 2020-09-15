@@ -42,11 +42,23 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'picture' => 'required',
+            'picture' => 'required|image|max:2048',
             'link' => 'required'
         ]);
 
-        Post::create($request->all());
+        $picture = $request->file('picture');
+
+        $new_name = rand() . '.' . $picture->getClientOriginalExtension();
+        $picture->move(public_path('images'), $new_name);
+        $form_data = array(
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'picture' => $new_name,
+            'link' => $request->link
+        );
+
+        Post::create($form_data);
 
         return redirect()->route('posts.index')->with('success','Post created successfully.');
     }
@@ -70,6 +82,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
         return view('posts.edit',compact('post'));
     }
 
@@ -86,11 +99,23 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'picture' => 'required',
+            'picture' => 'required|image|max:2048',
             'link' => 'required'
         ]);
 
-        $post->update($request->all());
+        $picture = $request->file('picture');
+
+        $new_name = rand() . '.' . $picture->getClientOriginalExtension();
+        $picture->move(public_path('images'), $new_name);
+        $form_data = array(
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'picture' => $new_name,
+            'link' => $request->link
+        );
+
+        Post::create($form_data);
 
         return redirect()->route('posts.index')->with('success','Post updated successfully');
     }

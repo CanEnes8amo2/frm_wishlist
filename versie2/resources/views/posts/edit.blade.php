@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('posts.update',$post->id) }}" method="POST">
+    <form action="{{ route('posts.update',$post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @method('PUT')
@@ -57,8 +57,11 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Picture URL:</strong>
-                    <input class="form-control" name="picture" placeholder="Picture" value=" {{ $post->picture }}"></input>
+                    <strong>Picture:</strong>
+{{--                    <input class="form-control" name="picture" placeholder="Picture" value=" {{ $post->picture }}"></input>--}}
+                    <input class="form-control" type="file" name="picture" />
+                    <img src="{{ URL::to('/') }}/images/{{ $post->picture }}" class="img-thumbnail" width="100" />
+                    <input type="hidden" name="hidden_image" value="{{ $post->picture }}" />
                 </div>
             </div>
 

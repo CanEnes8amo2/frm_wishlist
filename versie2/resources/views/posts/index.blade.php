@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->description }}</td>
-                    <td><img src="{{ $post->picture }}" style="width:500px;height:600px;"></td>
+                    <td><img src="{{ URL::to('/') }}/images/{{ $post->picture }}" class="img-thumbnail" width="300" /></td>
                     <td><a href=" {{ $post->link }}">{{ $post->price }}</a> </td>
 {{--                    @auth()--}}
 {{--                        <td>--}}
