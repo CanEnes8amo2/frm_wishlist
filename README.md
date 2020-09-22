@@ -1,1 +1,1 @@
-FRM - Wishlist
+FRM Wishlist
