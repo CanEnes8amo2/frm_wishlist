@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->integer('price')->nullable();
             $table->string('picture')->nullable();
             $table->string('link')->nullable();
+            $table->integer('role')->nullable();
             $table->timestamps();
         });
     }

@@ -29,6 +29,7 @@
                 <th>Price</th>
             </tr>
             @foreach ($posts as $post)
+                @if (auth()->user()->role === 0 && $post->role === 0)
                 <tr>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->description }}</td>
@@ -44,6 +45,23 @@
                             </form>
                         </td>
                 </tr>
+                @elseif (auth()->user()->role === 1)
+                    <tr>
+                        <td>{{ $post->title }}</td>
+                        <td>{{ $post->description }}</td>
+                        <td><img src="{{ URL::to('/') }}/images/{{ $post->picture }}" class="img-thumbnail" width="300" /></td>
+                        <td><a href=" {{ $post->link }}">{{ $post->price }}</a> </td>
+                        <td>
+                            <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                                <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </table>
     </div>

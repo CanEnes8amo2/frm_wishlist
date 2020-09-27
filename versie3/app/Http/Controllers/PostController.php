@@ -55,7 +55,8 @@ class PostController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'picture' => $new_name,
-            'link' => $request->link
+            'link' => $request->link,
+            'role' => auth()->user()->role
         );
 
         Post::create($form_data);
